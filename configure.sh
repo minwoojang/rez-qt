@@ -20,6 +20,9 @@ echo -e "[CONFIGURE][ARGS] BUILD PATH: ${BUILD_PATH}"
 echo -e "[CONFIGURE][ARGS] INSTALL PATH: ${INSTALL_PATH}"
 echo -e "[CONFIGURE][ARGS] QT VERSION: ${QT_VERSION}"
 
+sed -i '1i#ifdef __cplusplus\n#include <limits>\n#endif' /qt/5.15.2/qtbase/src/corelib/global/qglobal.h
+
+
 # We check if the arguments variables we need are correctly set.
 # If not, we abort the process.
 if [[ -z ${EXTRACT_PATH} || -z ${BUILD_PATH} || -z ${INSTALL_PATH} || -z ${QT_VERSION} ]]; then
@@ -40,19 +43,26 @@ cd ${BUILD_PATH}
 
 ${EXTRACT_PATH}/configure \
     -prefix ${INSTALL_PATH} \
-    -opensource \
     -confirm-license \
+    -opensource \
+    -release \
+    -nomake tests \
     -nomake examples \
-    -qt-zlib \
-    -qt-libpng \
-    -qt-libjpeg \
-    -qt-freetype \
-    -qt-harfbuzz \
-    -qt-pcre \
-    -qt-xcb \
-    -xkbcommon \
-    -evdev \
-    -verbose
+    -opengl \
+    -skip webengine
+    # -opensource \
+    # -confirm-license \
+    # -nomake examples \
+    # -qt-zlib \
+    # -qt-libpng \
+    # -qt-libjpeg \
+    # -qt-freetype \
+    # -qt-harfbuzz \
+    # -qt-pcre \
+    # -qt-xcb \
+    # -xkbcommon \
+    # -evdev \
+    # -verbose
 
 echo -e "\n"
 echo -e "[CONFIGURE] Finished configuring Qt-${qt_version}!"

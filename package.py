@@ -1,6 +1,6 @@
 name = "qt"
 
-version = "5.12.6"
+version = "5.15.2"
 
 authors = [
     "The Qt Company"
@@ -16,12 +16,10 @@ description = \
 
 requires = [
     "cmake-3+",
-    "gcc-6+"
+    "gcc-11"
 ]
 
-variants = [
-    ["platform-linux"]
-]
+variants = [['platform-linux', 'arch-x86_64']]
 
 tools = [
     "assistant",

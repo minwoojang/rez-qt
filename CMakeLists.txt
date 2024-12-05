@@ -26,9 +26,11 @@ set(BUILD_DIR ${EXTRACT_DIR}/build)
 # by "", an empty string.
 ExternalProject_Add(
     REZ_QT
-    URL ${QT_URL}
+    # URL ${QT_URL}
+    # SOURCE_DIR /qt/5.15.2
     PREFIX qt
-    SOURCE_DIR ${EXTRACT_DIR}
+    UPDATE_COMMAND ""
+    SOURCE_DIR  /qt/5.15.2#${EXTRACT_DIR}
     PATCH_COMMAND ""
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND bash ${CMAKE_SOURCE_DIR}/configure.sh ${EXTRACT_DIR} ${BUILD_DIR}
